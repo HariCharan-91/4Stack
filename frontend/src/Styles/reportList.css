@@ -1,0 +1,87 @@
+.listcontainer {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.button-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.button-container button {
+    margin-bottom: 10px;
+}
+
+.data-container {
+    flex: 2;
+    margin-left: 10px;
+    overflow-y: auto; /* Add overflow-y property for scrolling */
+    max-height: calc(100vh - 160px); /* Adjust max-height to fit within viewport */
+}
+
+.data-header {
+    border-radius: 10px;
+    color: rgb(14, 14, 170);
+    position: sticky;
+    top: 0; /* Stick the header to the top */
+    display: flex;
+    /* background-color:rgb(54, 159, 200); */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;  
+    /* border-radius: 1px; */
+    z-index: 1; /* Ensure the header is above the data-container */
+}
+
+.header-item,
+.data-item {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    
+}
+
+.data-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Add border bottom */
+}
+
+
+select {
+    width: 50%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 16px;
+    /* border: 1px solid #ccc; */
+    border-radius: 3px;
+    /* background-color: #fff; */
+    color: #090909;
+    text-align: center; /* Center text horizontally */
+}
+
+/* Center text vertically */
+select option {
+    text-align: center;
+    
+}
+
+
+/* CSS for different priority colors */
+.data-item:nth-child(1) {
+    background-color: rgba(8, 69, 131, 0.286);
+    border-radius: 10px;
+    text-align: left;
+    padding-left: 20px;
+    width: auto;
+}
+
+.green-icon {
+    color: rgb(156, 236, 156);
+}

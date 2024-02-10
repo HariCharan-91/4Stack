@@ -1,0 +1,62 @@
+.report-page {
+    position: relative;
+    background-color: #030303;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 15px; /* Adjust top margin */
+    left: 15px; /* Adjust left margin */
+    right: 15px; /* Adjust right margin */
+    bottom: 15px; /* Adjust bottom margin */
+    background-color: rgba(172, 206, 239, 0.94);
+
+    border-radius: 15px;
+  }
+  
+  .container {
+    position: absolute;
+    top: 30px; /* Adjust top margin */
+    left: 30px; /* Adjust left margin */
+    right: 30px; /* Adjust right margin */
+    bottom: 30px; /* Adjust bottom margin */
+    display: flex;
+  }
+  
+  .button-group {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+  
+  }
+  
+  .button-group .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #030303;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: auto;
+    height: 110px;
+  }
+  
+  .button-group .button.active {
+    background-color: rgb(54, 159, 200);
+    font-weight: bold;
+  }
+  
+  .button-group .button + .button {
+    margin-top: 10px;
+  }
+  
+  .report-list-container {
+    flex: 3;
+    overflow-y: auto; /* Add this line to make the container scrollable */
+    max-height: calc(100vh - 100px); /* Adjust as needed */
+  }
+  
+
+
