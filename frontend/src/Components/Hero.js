@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import GLobe from "../Assets/Globe.avif";
-import { useNavigate } from "react-router-dom";
+import GLobe from "../Assets/Ambulance_service.jpg";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../Styles/Hero.css";
 // import { gsap } from 'gsap';
 
@@ -13,9 +13,7 @@ function Hero() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleBookAppointmentClick = () => {
-    navigate("/report"); // Change the path to "/report"
-  };
+  
 
   useEffect(() => {
     const onPageScroll = () => {
@@ -77,17 +75,27 @@ function Hero() {
           <p className="text-descritpion">
 
           </p>
+          <NavLink to = "/report">
           <button
             className="text-appointment-btn"
-            type="button"
-            onClick={handleBookAppointmentClick}>
+            type="button">
             Calls Registered
           </button>
+          </NavLink>
+
+          <NavLink to = "/portal">
+          <button
+            className="text-appointment-btn"
+            type="button">
+            Watch Portal
+          </button>
+          </NavLink>
+          
 
         </div>
 
         <div className="hero-image-section">
-          {/* <img className="hero-image1" src={GLobe} width={200} alt="Doctor" /> */}
+          <img className="hero-image1" src={GLobe} width={200} alt="Doctor" /> 
           {/* <img className="hero-image1" ref={globeRef} src={GLobe} width={200} alt="Globe" /> */}
         </div>
       </div>

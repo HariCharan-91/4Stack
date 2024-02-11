@@ -1,62 +1,70 @@
-.report-page {
-    position: relative;
-    background-color: #030303;
-  }
-  
-  .overlay {
-    position: fixed;
-    top: 15px; /* Adjust top margin */
-    left: 15px; /* Adjust left margin */
-    right: 15px; /* Adjust right margin */
-    bottom: 15px; /* Adjust bottom margin */
-    background-color: rgba(172, 206, 239, 0.94);
 
-    border-radius: 15px;
-  }
-  
-  .container {
-    position: absolute;
-    top: 30px; /* Adjust top margin */
-    left: 30px; /* Adjust left margin */
-    right: 30px; /* Adjust right margin */
-    bottom: 30px; /* Adjust bottom margin */
-    display: flex;
-  }
-  
-  .button-group {
-    flex: 0.8;
-    display: flex;
-    flex-direction: column;
-    margin-right: 30px;
-  
-  }
-  
-  .button-group .button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #ffffff;
-    color: #030303;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    width: auto;
-    height: 110px;
-  }
-  
-  .button-group .button.active {
-    background-color: rgb(54, 159, 200);
-    font-weight: bold;
-  }
-  
-  .button-group .button + .button {
-    margin-top: 10px;
-  }
-  
-  .report-list-container {
-    flex: 3;
-    overflow-y: auto; /* Add this line to make the container scrollable */
-    max-height: calc(100vh - 100px); /* Adjust as needed */
-  }
-  
+.overlay {
+  position: fixed;
+  top: 80px;
+  left: 80px;
+  right: 80px;
+  bottom: 1px;
+  background-color: rgba(6, 52, 97, 0.8);
+  /* border-radius: 30px; */
+  z-index: 1;
+  animation: overlayAnimation 5s ease infinite alternate;
+}
 
+.container {
+  position: absolute;
+  top: 30px;
+  left: 15%;
+  right: 15%;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2; /* Set a higher z-index to make sure it's above the footer */
+}
 
+.button-group {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.button-group .button {
+  flex: 1;
+  padding: 20px;
+  font-size: 18px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-group .button.active {
+  background-color: #3498db;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.button-group .button:not(:last-child) {
+  margin-right: 15px;
+}
+
+.button-group {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.report-list-container {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
+}
+
+@keyframes overlayAnimation {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1.0;
+  }
+}

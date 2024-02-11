@@ -10,7 +10,10 @@
    /* Add blur effect to the background image */
    
 }
-
+.section-container {
+    position: relative;
+    z-index: 2; /* Set a lower z-index value */
+  }
 /* Text section */
 .text-section {
     width: 60%;
@@ -68,6 +71,7 @@
 .hero-image1 {
     width: 100%;
     height: auto;
+    border-radius: 50px;
 }
 /* Scroll Btn */
 .scroll-up {

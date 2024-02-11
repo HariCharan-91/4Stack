@@ -9,132 +9,197 @@ import json
 from web3 import Web3
 import random
 from sendSMS import sendMSG;
+from LLM import generate_json;
 
 app = Flask( __name__ )
 base_url = "https://api.assemblyai.com/v2"
 
 headers = {"authorization": "56b358be260841d0acc6c2480ceafa2e"}
-client = Client("AC60b4b1971498ba2a35488e24dca7b1ca", "5b6c263c26420741e2779cc63eb3a27c")
+client = Client("ACc6897f286917dd1f0d8ea3365581ef3f", "17efc0fd87ae7318eca78b636e00cebd")
 
 #Eth Starts Here
 provider = Web3.HTTPProvider('https://eth-sepolia.g.alchemy.com/v2/zDdlaNQNTz6PrbF8nXtdvbM6BEt2aMFW')
 w3 = Web3(provider)
 
-contract_address = Web3.to_checksum_address("0xe20B47782906cbB129B6D4028ce7FC37e9572D28")
+contract_address = Web3.to_checksum_address("0x18F47f219a7E722D146E481c7Dd8771d95CA1C0f")
 
 
 contract_abi =[
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "D",
-          "type": "string"
-        }
-      ],
-      "name": "addOperation",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "op",
-          "type": "address"
-        }
-      ],
-      "name": "addToWhitelist",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getOperations",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "uint256",
-              "name": "id",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "data",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "status",
-              "type": "uint256"
-            }
-          ],
-          "internalType": "struct Contract.OperationData[]",
-          "name": "",
-          "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "op",
-          "type": "address"
-        }
-      ],
-      "name": "removeFromWhitelist",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "s",
-          "type": "uint256"
-        }
-      ],
-      "name": "setStatus",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ]
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_location",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_emergency_type",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_priority",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_problem",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_callerNumber",
+				"type": "string"
+			}
+		],
+		"name": "addOperation",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_new",
+				"type": "address"
+			}
+		],
+		"name": "addToWhitelist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getProposals",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "emergency_type",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "priority",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "problem",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "callerNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "enum Contract.Status",
+						"name": "status",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct Contract.Proposal[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "get_unresolved_proposals",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_remove",
+				"type": "address"
+			}
+		],
+		"name": "removeFromWhitelist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum Contract.Status",
+				"name": "_status",
+				"type": "uint8"
+			}
+		],
+		"name": "updateStatus",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "whiteList",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
 
 contract = w3.eth.contract(address=contract_address, abi=contract_abi)
 sender_address = Web3.to_checksum_address("0x9DCF58834F0e75Ffd72623cCf5447D01dd85Ba81")
 w3.eth.defaultAccount = sender_address
-nonce = w3.eth.get_transaction_count(sender_address)
-data = contract.functions.getOperations().build_transaction({
-    'gas': 100000,
-    'gasPrice': w3.to_wei('20', 'gwei'),
-    'nonce': nonce,
-})
-signed_txn = w3.eth.account.sign_transaction(data, private_key='')
-tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
-tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+
 #Eth Ends Here
 
 @app.route("/answer", methods=['GET', 'POST'])
@@ -183,15 +248,22 @@ def handle_recording():
 
       print(caller_number)
       print("Getting priority info from OpenAI");
-      transcription_text = transcription_result['text'];
+      transcription_text = transcription_result['text']
       print(transcription_text)
+      
+      prompt_JSON=generate_json(transcription_text)
+      
+      
+      # prompt_dist=json.loads(prompt_JSON);
+      
+      
 
-      s="a call from :"+caller_number+"the context is :"+transcription_text
+      # s="a call from :"+caller_number+"the context is :"+transcription_text
 
          
-      rand_12_digit_id = random.randint(100000000000,999999999999)
+      # rand_12_digit_id = random.randint(100000000000,999999999999)
      
-      transaction = contract.functions.addOperation(rand_12_digit_id,s).build_transaction({
+      transaction = contract.functions.addOperation(prompt_JSON["name"],prompt_JSON["location"],prompt_JSON["emergency_type"],prompt_JSON["priority"],prompt_JSON["problem"],caller_number).build_transaction({
              'gas': 2000000,
              'gasPrice': w3.to_wei('50', 'gwei'),
              'nonce': w3.eth.get_transaction_count(sender_address),
@@ -204,9 +276,9 @@ def handle_recording():
       print("Transaction Completed Successfully.")
       print("\n")
 
-      print(sendMSG("Thank for using EMCALL your response is stored and within short time you will be provided with required services", caller_number));
-
-
+      print(sendMSG("Thank for using EMCALL your response is stored and within short time you will be provided with required services", caller_number))
+      
+ 
 
       break
 

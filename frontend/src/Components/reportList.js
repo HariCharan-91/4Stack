@@ -1,67 +1,97 @@
-import React, { useState } from 'react';
-import SelectionOption from './Selectioncolor';
+// reportList.js
+import React, { useState, useEffect } from 'react';
 import '../Styles/reportList.css';
+import SelectionOption from './Selectioncolor';
 
-function TableRow({ values }) {
-    return (
-        <div className="data-row">
-            {values.map((value, index) => (
-                <div key={index}>{value}</div>
+
+function ReportList({ data, activeButton }) {
+  const [rows, setRows] = useState([]);
+  const [item, setItems] = useState(data)
+  console.log(data)
+
+
+  useEffect(() => {
+
+    console.log("Data in ReportList:", data);
+
+    if (data && data.length > 0) {
+      let filteredData;
+
+      switch (activeButton) {
+        case 1:
+          filteredData = data.filter(val => val[6] === 0);
+          break;
+        case 2:
+          filteredData = data.filter(val => val[6] === 1);
+          break;
+        case 3:
+          filteredData = data.filter(val => val[6] === 2);
+          break;
+        default:
+          filteredData = data;
+      }
+
+      console.log("Filtered Data in ReportList:", filteredData);
+
+
+      const formattedData = filteredData.map(item => [
+        item[4], // Prompt
+        item[0], // Caller Name
+        item[5], // Caller Phone Number
+        item[1], // Place
+        item[2], // Field
+        item[3], // Priority
+        item[6]
+      ]);
+
+      console.log("Formatted Data in ReportList:", formattedData);
+
+
+      setRows(formattedData);
+    } else {
+        console.log("No data or empty array in ReportList");
+
+      setRows([]);
+    }
+  }, [data, activeButton]);
+
+  return (
+    <div className="listcontainer">
+      <div className="data-container">
+        <div className="data-header">
+          <div className="header-item ">TEXT</div>
+          <div className="header-item">CALLER</div>
+          <div className="header-item">Call.No</div>
+          <div className="header-item">place</div>
+          <div className="header-item">Field</div>
+          <div className="header-item">Priority</div>
+        </div>
+        {rows.map((rowData, index) => (
+          <div className="data-row" key={index}>
+            {rowData.map((dataItem, dataIndex) => (
+              <div className="data-item" key={dataIndex}>
+                {dataIndex === 1 ? (
+                  <div>
+                    <i className="icon fas fa-phone green-icon"></i>
+                    <br />
+                    {dataItem.split('\n')[0]}<br />
+                    <span className="tag">+91 {dataItem.split('\n')[1]}</span>
+                  </div>
+                ) : (
+                  dataIndex === rowData.length-1 ? (
+                    <SelectionOption selected={dataItem[6]}/>
+                    // <></>
+                  ) : (
+                    dataItem
+                  )
+                )}
+              </div>
             ))}
-        </div>
-    );
-}
-
-function ReportList() {
-    const [rows, setRows] = useState([
-        ["Prompt :", "John Doe\n123-456-7890", "Pending"],
-        // ["Low", "Jane Smith\n987-654-3210", "Yes", "11:00 AM", "456 Elm St", "In Progress"],
-        // Add more rows here if needed
-    ]);
-
-    // Function to add a new row
-    const addRow = () => {
-        const newRow = ["Prompt : ", "", "Pending"];
-        setRows(prevRows => [...prevRows, newRow]);
-    };
-
-    return (
-        <div className="listcontainer">
-            <div className="data-container">
-                <div className="data-header">
-                    <div className="header-item ">TEXT</div>
-                    <div className="header-item">CALLER</div>
-                    <div className="header-item">STATUS</div>
-                </div>
-                {/* Render rows dynamically */}
-                <div></div>
-                {rows.map((rowData, index) => (
-                    <div className="data-row" key={index}>
-                        {rowData.map((dataItem, dataIndex) => (
-                            <div className="data-item" key={dataIndex}>
-                                {dataIndex === 1 ? (
-                                    <div>
-                                        <i className="icon fas fa-phone green-icon"></i>
-                                        <br />
-                                        {dataItem.split('\n')[0]}<br />
-                                        <span className="tag">+91 {dataItem.split('\n')[1]}</span>
-                                    </div>
-                                ) : (
-                                    dataIndex === rowData.length - 1 ? (
-                                        <SelectionOption />
-                                    ) : (
-                                        dataItem
-                                    )
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                ))}
-            </div>
-            {/* Add button to add new rows */}
-            <button className="add-button" onClick={addRow}>Add Row</button>
-        </div>
-    );
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default ReportList;

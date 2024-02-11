@@ -1,9 +1,10 @@
 .listcontainer {
     display: flex;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
+    background-color: #fff;
+    border-radius: 15px;
     padding: 20px;
-}
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
 
 .button-container {
     flex: 1;
@@ -17,34 +18,75 @@
     margin-bottom: 10px;
 }
 
+.add-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4e54c8;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .add-button:hover {
+    background-color: #8f94fb;
+  }
+
 .data-container {
-    flex: 2;
-    margin-left: 10px;
-    overflow-y: auto; /* Add overflow-y property for scrolling */
-    max-height: calc(100vh - 160px); /* Adjust max-height to fit within viewport */
-}
+    flex: 1;
+    margin-left: 20px;
+    overflow-y: auto;
+    max-height: calc(100vh - 180px);
+  }
 
 .data-header {
     border-radius: 10px;
-    color: rgb(14, 14, 170);
+    color: white;
     position: sticky;
-    top: 0; /* Stick the header to the top */
+    top: 0;
     display: flex;
-    /* background-color:rgb(54, 159, 200); */
     padding: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #ccc;  
-    /* border-radius: 1px; */
-    z-index: 1; /* Ensure the header is above the data-container */
-}
+    border-bottom: 1px solid #ccc;
+    z-index: 1;
+    background: linear-gradient(90deg, #4e54c8, #8f94fb);
+  }
 
-.header-item,
-.data-item {
+  .header-item {
     flex: 1;
     text-align: center;
     padding: 8px;
-    
-}
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    position: relative;
+  }
+  .header-item:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s;
+  }
+  
+  .header-item:hover:before {
+    width: 100%;
+  }
+  .data-item {
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .data-item:last-child {
+    border-bottom: none;
+  }
 
 .data-row {
     display: flex;

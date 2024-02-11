@@ -1,0 +1,24 @@
+.selection-container {
+    position: relative;
+  }
+  
+  select {
+    padding: 10px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s;
+  }
+  
+  select:hover {
+    background-color: #f4f4f4;
+  }
+  
+  select:focus {
+    border-color: #4e54c8;
+    box-shadow: 0 0 5px rgba(78, 84, 200, 0.7);
+  }
+  

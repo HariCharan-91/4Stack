@@ -7,8 +7,11 @@
     background-image: url('../Assets/download.jpg');
     background-size: cover; 
     color:white;
+    position: relative;
+    z-index: 3
      
 }
+
 .navbar-title a {
     color: #fafafa;
     letter-spacing: .6px;

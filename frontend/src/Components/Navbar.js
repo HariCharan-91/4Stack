@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 function Navbar() {
   const [nav, setNav] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [address,setaddress]=useState('');
+
 
   const openNav = () => {
     setNav(!nav);
@@ -27,11 +29,25 @@ function Navbar() {
     }
   };
 
+  const connectWallet= async()=>{
+
+    window?.ethereum?.on('chainChanged', () => {
+      window.location.reload();
+    });
+    
+    window?.ethereum?.on('accountsChanged', () => {
+      window.location.reload();
+    });
+
+    const fetchedAccounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    setaddress(fetchedAccounts[0]);
+  }
+
   return (
-    <div className="navbar-section">
+    <div className="navbar-section"  >
       <h1 className="navbar-title">
         <Link to="/">
-          EMCALL <span className="navbar-sign"></span>
+          CIPHER RESCUE <span className="navbar-sign"></span>
         </Link>
       </h1>
 
@@ -52,8 +68,12 @@ function Navbar() {
             About
           </a>
         </li>
-
-         <button class="button-59" role="button">Connect Your Wallet</button>
+        {
+          address?(<>
+            <button class="button-59" role="button" >{address}</button>
+          </>):(<button class="button-59" role="button" onClick={connectWallet}>Connect Your Wallet</button>)
+        }
+         
 
       
       </ul>
@@ -82,16 +102,7 @@ function Navbar() {
               About
             </a>
           </li>
-          <li>
-            <a onClick={openNav} href="#reviews">
-              Reviews
-            </a>
-          </li>
-          <li>
-            <a onClick={openNav} href="#doctors">
-              Doctors
-            </a>
-          </li>
+          
           <li>
             <a onClick={openNav} href="#contact">
               Contact
