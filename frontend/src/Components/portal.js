@@ -1,9 +1,11 @@
-// report.js
 import React, { useEffect, useState } from 'react';
-import ReportList from './reportList';
 import '../Styles/report.css';
 import abi from '../data/abi.json';
 import { ethers } from 'ethers';
+import '../Styles/portal.css';
+import LogoImage from '../Assets/kio.jpg';
+import BackgroundImage from "../Assets/5169546.jpg";
+
 
 export default function Portal() {
 
@@ -34,17 +36,21 @@ export default function Portal() {
   
 
   return (
-    <div className="status-form-container">
+    <div className="status-form-container" style={{ backgroundImage: `url(${BackgroundImage})` }}>
+    <div className="logo-container">
+      {/* Add your logo with a circular styling */}
+      <img className="logo" src={LogoImage} alt="Logo" />
+    </div>
     <div className="status-form">
       <h2>Update Status</h2>
-      <label htmlFor="idInput">ID:</label>
+      <label htmlFor="idInput" className="hover-label">ID:</label>
       <input
         type="text"
         id="idInput"
         value={id}
         onChange={handleIdChange}
       />
-      <label htmlFor="statusSelect">Status:</label>
+      <label htmlFor="statusSelect" className="hover-label">Status:</label>
       <select id="statusSelect" value={status} onChange={handleStatusChange}>
         <option value="2">Resolved</option>
         <option value="0">Unresolved</option>
